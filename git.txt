@@ -1,0 +1,40 @@
+1.git --version(to check git version)
+
+2.git  (to get git information)
+
+Only one time
+3.ssh-keygen (only one time)
+  enter
+  enter
+  enter
+4.ssh -T git@github.com (check connect or not)
+  git config --global user.name "MyaEiSan"
+  git config --global user.email "myaeisan722@gmail.com"
+6. git config user.name (to check entered username)
+   git config user.email (to check entered email)
+
+
+5.git init (install git into project folder)
+
+do this one time in every new repository 
+
+6.git remote add origin git@github.com:MyaEiSan/pttsoftware.git(connect with repository)
+
+7.git remote -v (to check what repository did you connect with)
+8.git status (check what file exist,red color is not push,green color is already)
+9.git add -A (add files that is red in color into git folder)
+10.git commit -m "26 may 2022"
+11.git push -u origin master
+
+
+Heroku
+
+git init
+heroku login
+heroku git:remote -a 
+git add
+git push heroku master
+
+heroku open
+
+

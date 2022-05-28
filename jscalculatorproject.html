@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculator Project</title>
+	<!-- <link rel="stylesheet" href="libs/fontawesomepro/css/regular.min.css"/> -->
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<style type="text/css">
+		body{
+			height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background-color: #69e0bb; /*a9d1c3*/
+			overflow: hidden;
+		}
+
+		#calculator h2{
+			text-align: center;
+			color: #82a0e0;
+		}
+		#calculator a{
+			text-decoration: none;
+			padding: 15px; /*last*/
+			font-size: 30px;
+			color: #82a0e0;/*last*/
+			transition: 2s;/*last*/
+		}
+		table{
+			position: relative;
+			border: 5px solid #abc8de;
+			background-color: #abc8de;
+			height: 350px;
+			border-radius: 15px;
+			box-shadow: -2px 2px 0 #f4f4f4,2px -2px 0 #f4f4f4;
+		}
+
+
+		table tr td{
+			text-align: center;
+			background-color: #fff;
+			/*width: 10px;*/ /*last*/
+			cursor: pointer;
+			border: 2px solid #69e0bb;/*b6bfbc*/
+			border-radius: 15px;/*last*/
+			position: relative;
+			overflow: hidden;
+			z-index: 3;
+			transition: 2s; /*last*/
+		}
+
+		table tr td:hover{
+			background-color: #82a0e0;
+		}
+
+		#calculator a:hover{
+			color: white;
+		}
+
+		td#input{
+			text-align: right;
+			border: none;/*last*/
+			/*border-radius: 0;*/
+			/*border-top-left-radius: 10px;*/
+			/*border-top-right-radius: 10px;*/
+		}
+
+		td#input:hover{
+			background-color: white;
+		}
+
+
+
+		td#equal{
+			/*background-color: #82a0e0;*/
+		}
+
+		td#equal a{
+			color: #82a0e0;
+		}
+
+		td#equal:hover{
+			color: white;
+		}
+
+		td .fa-delete-left{
+			color:  #82a0e0;
+			/*color: red;*/
+		}
+		td:hover .fa-delete-left{
+			color: #fff;
+		}
+
+		/*td#equal a{
+			color: white;
+		}*/
+
+		#result,.view{
+			color: #82a0e0; /*last*/
+			border: none;
+			outline: none;
+			text-align: right;
+			font-size: 25px;
+			padding-top: 10px;
+			/*transition: 2s;*/
+			position: absolute;
+			top: 0;
+			right: 0;
+			z-index: -1;
+		}
+		.view{
+			top: 100%;
+			opacity: 0;
+		}
+		td .up{
+			transform: translateY(-30px);
+			opacity: 0;
+			transition: 2s;
+		}
+
+		td #view{
+			top: 0;
+			transition: 2s;
+			opacity: 1;
+		}
+	</style>
+</head>
+<body>
+<div id="calculator">
+	<!-- <h2>Calculator Project</h2> -->
+	<table>
+		<tr>
+			<td colspan="4" id="input">
+				<a><input type="text" id="result" autofocus/></a>
+				<a><input type="text" value="ewp" class="view" autofocus/></a>
+			</td>
+		</tr>
+		<tr>
+			<td><a value="C" onclick="clearinput()">C</a></td>
+			<td><a value="/" onclick="inputnumber(this)">&divide;</a></td>
+			<td><a value="*" onclick="inputnumber(this)">&times;</a></td>
+			<td><a onclick="deleteinput()"><i class="fa-solid fa-delete-left"></i></a></td>
+		</tr>
+		<tr>
+			<td><a value="7" onclick="inputnumber(this)">7</a></td>
+			<td><a value="8" onclick="inputnumber(this)">8</a></td>
+			<td><a value="9" onclick="inputnumber(this)">9</a></td>
+			<td><a value="-" onclick="inputnumber(this)">-</a></td>
+		</tr>
+		<tr>
+			<td><a value="4" onclick="inputnumber(this)">4</a></td>
+			<td><a value="5" onclick="inputnumber(this)">5</a></td>
+			<td><a value="6" onclick="inputnumber(this)">6</a></td>
+			<td><a value="+" onclick="inputnumber(this)">+</a></td>
+		</tr>
+		<tr>
+			<td><a value="1" onclick="inputnumber(this)">1</a></td>
+			<td><a value="2" onclick="inputnumber(this)">2</a></td>
+			<td><a value="3" onclick="inputnumber(this)">3</a></td>
+			<!-- <td rowspan="2" id="equal" onclick="calculate(false,sign)"><a value="=">=</a></td> -->
+			<td rowspan="2" id="equal" onclick="calculate(arr,input)"><a value="=">=</a></td>
+		</tr>
+		<tr>
+			<td><a value="%" onclick="inputnumber(this)">%</a></td>
+			<td><a value="0" onclick="inputnumber(this)">0</a></td>
+			<td><a value="." id="dot" onclick="inputnumber(this)">.</a></td>
+			
+		</tr>
+
+	</table>
+
+</div>
+
+<!-- <script type="text/javascript">
+
+
+	let input = '';
+	let sign = '';
+	var result = 0;
+	var preresult,presign;
+	let num = 0;
+	let getinput = document.getElementById('result');
+	let view = document.querySelector('.view');
+	function inputnumber(th){
+		let inputval = th.getAttribute('value');
+		getinput.value += inputval;
+		// getinput.classList.remove('up');
+		// view.id='';
+		removeeffect();
+
+
+		
+		input += inputval;
+		console.log(input);
+
+	}
+	
+	function process(th){
+		presign = sign;// ''
+
+		//remove effect
+		removeeffect();
+
+		sign = th.getAttribute('value');
+		let show = th.textContent;
+		getinput.value += show;
+
+		if(result === 0){
+			result = Number(input);
+			input = '';
+		}else{
+			calculate(true,presign);
+
+		}
+	}
+
+	function calculate(choise,sig){
+		switch(sig){
+				case '+': 
+				      result += Number(input);
+				break;
+				case '-':
+				      result -= Number(input);
+				break;
+				case '*':
+				      result *= Number(input);
+				break;
+				case '/':
+				      result /= Number(input);
+				break;
+				case '%':
+				      // result %= Number(input);
+				      result /=100;
+				break;  
+				default:
+				      if(result === 0){
+				      	result = Number(input);
+				      }else{
+				      	result = result;
+				      }
+			}
+
+			if(choise == false){
+				sign = '';
+				getinput.className = "up";
+			    view.value = result;
+			    view.id = "view";
+			    getinput.value = result;
+			    input = '';
+			    input += result;
+			    result = 0;
+			}else{
+				input = '';
+			}
+			
+
+		console.log(result);
+		console.log(input);
+	}
+
+	function clearinput(th){
+		getinput.value = '';
+		result = 0;
+		input = '';
+		getinput.focus();
+		view.id='';
+		getinput.classList.remove('up');
+		// window.location.reload();
+	}
+
+	function deleteinput(){
+		let text = getinput.value;
+		let arrtext = Array.from(text);
+		arrtext.pop();
+		getinput.value = arrtext.join('');
+		console.log(typeof getinput.value);
+		
+		let calinput = Array.from(input);
+		calinput.pop();
+
+		input = calinput.join('');
+		console.log(typeof input,input);
+
+		removeeffect();
+
+	}
+
+	function removeeffect(){
+		getinput.classList.remove('up');
+		view.id='';
+	}
+</script> -->
+
+<script type="text/javascript">
+	let display = document.getElementById('result');
+	let view = document.querySelector('.view');
+	let arr=[];
+	let done = false;
+	let input = '';
+	let i = 0;
+	function inputnumber(th){
+		let val = th.getAttribute('value');
+		let predisplayval = '';
+		let displayval = th.textContent;
+
+		removeeffect();
+
+		if(val === '+' || val === '-' || val === '*' || val === '/'){
+			let add;
+
+			if(arr.length == 0){
+				add = true;
+			}else{
+				add = false;
+			}
+
+
+			if(arr[arr.length-1] === '+' || arr[arr.length-1] === '-' || arr[arr.length-1] === '*' || arr[arr.length-1] === '/'){
+				i = arr.length-1;
+				if(predisplayval === displayval){
+					display.value +='';
+				}else{
+					let dstring = display.value;
+					let darr = Array.from(dstring);
+					darr.pop();
+					display.value = darr.join('');
+					display.value +=displayval;
+				}
+			}else{
+				i++;
+				display.value +=displayval;
+			}
+			
+			done = false;
+			arr[i] = val;
+			input = '';
+			i++;
+
+			if(add){
+				arr = [];
+				display.value = '';
+				i = 0;
+			}
+
+		}else{
+			if(done){
+				arr[i] +=val;
+			}else{
+				input += val;
+			    arr[i] = input;
+			}
+
+			display.value += displayval;
+
+		}
+
+
+		console.log(arr);
+	}
+
+	function calculate(arr,input){
+		let issign = arr[arr.length-1];
+
+		if(issign === '+' || issign === '-' || issign === '*' || issign === '/'){
+			arr.pop();
+		}
+
+
+		if(arr.length === 1){
+			let onearr = Array.from(arr[0]);
+			let oneindex = onearr.indexOf('%');
+			if(oneindex !== -1){
+				arr[0] = calpercent(onearr,oneindex);
+			}
+
+		}else{
+			while(arr.length > 1){
+			    let dindex = arr.indexOf('/');
+			    // console.log(dindex);
+
+			    if(dindex !== -1){
+				    getresult(dindex);
+			    }
+
+			    let mindex = arr.indexOf('*');
+
+			    if(mindex !== -1){
+				    getresult(mindex);
+			    }
+
+			    let miindex = arr.indexOf('-');
+
+			    if(miindex !== -1){
+				    getresult(miindex);
+			    }
+
+			    let pindex = arr.indexOf('+');
+
+			    if(pindex !== -1){
+			        getresult(pindex);
+			    }
+			}
+
+		}
+
+		    function getresult(index){
+		    	let firstarr = Array.from(arr[index-1]);
+		    	let firstindex = firstarr.indexOf('%');
+		    	let secondarr = Array.from(arr[index+1]);
+		    	let secondindex = secondarr.indexOf('%');
+
+		    	if(firstindex !== -1){
+		    		arr[index-1] = calpercent(firstarr,firstindex);
+		    	}else if(secondindex !== -1){
+		    		arr[index+1] = calpercent(secondarr,secondindex);
+		    	}
+
+		    	console.log(arr[index-1]);
+
+			    switch(arr[index]){
+				    case '+':
+				        arr[index-1] = Number(arr[index-1])+Number(arr[index+1]);
+				    break;
+				    case '-':
+				        arr[index-1] = Number(arr[index-1])-Number(arr[index+1]);
+				    break;
+				    case '*':
+				        arr[index-1] = Number(arr[index-1])*Number(arr[index+1]);
+				    break;
+				    case '/':
+				        arr[index-1] = Number(arr[index-1])/Number(arr[index+1]);
+				    break;
+				}
+			    console.log(arr[index-1]);
+				arr.splice(index,2);
+				console.log(arr);
+		    }
+
+		    function calpercent(carr,cindex){
+
+				    let calresult = percent();
+
+					    // To multiply value before  % by after % value
+
+					    // get portion of number after %
+					    let cstring = carr.join('');
+					    console.log(carr);
+
+			            
+			            let afterarr = carr.splice(1,carr.length-1);
+			            console.log(carr);
+			            console.log(afterarr,afterarr.length);
+
+			            if(afterarr.length > 0){
+			            	// get calculation after result
+			                let afterresult = Number(afterarr.join(''));
+			                console.log(typeof calresult,calresult);
+			                console.log(typeof afterresult,afterresult);
+			                var myresult = calresult*afterresult;
+			            }else{
+			            	var myresult = calresult;
+			            }
+
+
+			    function percent(){
+				    // get portion of number before %
+				    
+			        let beforearr = carr.splice(0,cindex);
+			        console.log(beforearr);
+			        // get calculation before result
+			        let beforeresult = Number(beforearr.join(''))/100;
+			        console.log(beforeresult);
+				    return beforeresult;
+				}
+
+				console.log(myresult);
+
+				return myresult;
+		    }
+		
+
+		i = 0;
+		if(arr[i] === undefined){
+			arr[i]='';
+		}
+
+		display.value = arr[i];
+		display.classList.add('up');
+
+		view.value = arr[i];
+		view.id = 'view';
+
+		done = true;
+
+		// add this for deleinput
+		input = '';
+
+	}
+
+	function clearinput(){
+		arr = [];
+		console.log(arr);
+		display.value = '';
+		view.value = '';
+		input = '';
+		i = 0;
+		done = false;
+		removeeffect();
+	}
+
+	function removeeffect(){
+		view.id="";
+		display.classList.remove('up');
+		display.focus();
+	}
+
+	function deleteinput(){
+		if(arr.length > 0){
+		    removeeffect();
+
+		    let string = arr[arr.length-1];
+
+		    let stringtype = typeof string;
+
+
+		    if(stringtype === 'number'){
+			    string = String(string);
+		    }
+
+		    // change string to array
+		    let charr = Array.from(string);
+		    charr.pop();
+
+		    // rechange to string
+		    let laststring = charr.join('');
+		    console.log(laststring);
+
+		    // readd value to last index of current arr
+		    arr[arr.length-1] = laststring;
+
+		    if(arr[arr.length-1] === ''){
+			    arr.pop();
+		    }
+
+		    console.log(arr);
+		    display.value = arr.join('');
+		    input = arr.join(''); // change
+
+		    // use this for adding input
+
+		    done = false;
+		    // input = '';
+		}
+
+	}
+
+
+
+
+</script>
+
+</body>
+</html>

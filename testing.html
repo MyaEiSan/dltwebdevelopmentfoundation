@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Testing </title>
+
+	<!-- <link href="css/testing.css" rel="stylesheet" type="text/css" /> -->
+
+	<style type="text/css">
+		@media print{
+			*{
+				visibility: hidden;
+			}
+
+			#printarea *{
+				visibility: visible;
+			}
+		}
+
+		@page{
+			margin: 0;
+		}
+
+		*{
+			box-sizing: border-box;
+		}
+
+		body{
+			height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			overflow: hidden;
+		}
+
+		#card{
+			width: 400px;
+			background-color: skyblue;
+
+			padding: 10px;
+			border-radius: 10px;
+			box-shadow: 2px 2px 10px #ddd;
+
+		}
+
+		h2{
+			text-align: center;
+		}
+		label{
+			display: block;
+			margin-bottom: 5px;
+		}
+		.form-control{
+			width: 100%;
+			padding: 10px;
+			background-color: #fff;
+
+			border: none;
+			outline: none;
+			border-radius: 10px;
+			margin-bottom: 5px;
+			
+		}
+		.submit{
+			display: flex;
+			justify-content: center;
+
+		}
+		.btn{
+			
+			background-color: #449be3;
+
+
+			margin-top: 5px;
+			padding: 10px 20px;
+
+			border: none;
+			border-radius: 10px;
+			cursor: pointer;
+		}
+
+		
+	</style>
+
+</head>
+<body>
+	
+	<div id="card">
+		<h2>Register Form</h2>
+		<form action="" method="">
+			<label for="name">Enter Name</label>
+			<input type="text" name="name" id="name" placeholder="enter name" class="form-control" autocomplete="off" onchange="upperfun()"/>
+
+			<label for="email">Enter Email</label>
+			<input type="email" name="email" id="email" placeholder="enter email" class="form-control" autocomplete="off" />
+
+			<label for="password">Enter password</label>
+			<input type="password" name="password" id="password" placeholder="enter password" class="form-control" autocomplete="off" />
+
+			<div class="submit">
+				<input type="submit" name="submit" id="submit" class="btn" />
+			</div>
+
+		</form>
+	</div>
+	
+	<script type="text/javascript">
+
+       
+
+       var a = document.getElementById('name');
+       let f = document.getElementById('email');
+
+       function upperfun(){
+       	a.value = a.value.toUpperCase();
+       }
+
+       f.addEventListener("click",function(){
+       	f.style.borderBottom = "3px solid grey";
+       });
+
+
+       function add1000(){
+       	let result = 0;
+       	for(let i = 0; i <= 1000 ; i++){
+       		result +=i
+       	}
+       	return result;
+       }
+
+       async function add1000later(){
+       	let result = await add1000();
+       	console.log(result);
+       }
+
+       console.log("Some Process");
+       add1000later()
+       console.log("More Process");
+
+       fetch("https://api.covid19api.com/summary")
+       .then(res=>res.json())
+       .then(data=>{
+       	let global = data.Global;
+       	let allcountries = data.Countries;
+       	let myanmar = allcountries.find(c=>c.Country === "Myanmar")
+       	console.log("Global:",global,"Myanmar:",myanmar);
+       })
+
+       
+
+	</script>
+
+</body>
+</html> 

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home Work 3</title>
+	<style type="text/css">
+		body{
+			background-image: url('img/background.jpg');
+			/*background-size: contain;*/
+			background-repeat: no-repeat;
+
+			color: #fff;
+		}
+
+		h1{
+			text-align: center;
+		}
+
+		legend,.id,a{
+			color: yellow;
+		}
+
+		h1,h4,label{
+			text-shadow: -6px -3px 2px #222;
+		}
+
+		@font-face{
+			font-family:Stick;
+			src: local(Stick-Regular), url('libs/fonts/stick/Stick-Regular.ttf');
+		}
+
+		legend{
+			font-family: Stick;
+		}
+
+		legend + p{
+			margin-top: -1px;
+		}
+
+		.id{
+			text-transform: uppercase;
+			text-align: right;
+			font-family: Stick;
+		}
+
+		.container{
+			display: flex;
+			justify-content: center;
+		}
+
+		.box{
+			width: 300px;
+			height: 257px;
+			border: 2px dotted #fff;
+
+			text-align: center;
+
+			margin-top: -15px;
+
+			margin-bottom: 83px;
+
+		}
+
+		.box p{
+			text-align: justify;
+		}
+
+		.box h4{
+			margin: 2px 0;
+		}
+
+		input[type="text"],input[type="password"],input[type="reset"],input[type="submit"]{
+			margin-bottom: 2px;
+		}
+
+		input[type="reset"]{
+			margin-left: 130px;
+		}
+
+
+	</style>
+</head>
+<body>
+	<h1>DLT Co.,Ltd</h1>
+	<fieldset>
+		<legend align="right">Design By :</legend>
+		<p class="id">Id Number: WDF6839</p>
+		<div class="container">
+		<div class="box">
+		<form action="" method="">
+			<h4>Login</h4>
+			<label for="username">Username</label>
+			<input type="text" name="username" id="username" css="" />
+			<br/>
+			<label for="password">Password&nbsp;</label>
+			<input type="password" name="password" id="password" class="password" />
+			<br/>
+			<input type="reset" value="Cancel" />
+			<input type="submit" value="Submit" />
+		</form>
+		<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.<a href="#">Register Here!</a></p>
+	</div>
+</div>
+	</fieldset>
+	
+</body>
+</html>
