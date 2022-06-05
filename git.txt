@@ -31,10 +31,10 @@ Heroku
 
 git init
 heroku login
-heroku git:remote -a 
-git add
+heroku git:remote -a mesmyfirstproject
+git add .
+git commit -am "My first project"
 git push heroku master
-
 heroku open
 
 
